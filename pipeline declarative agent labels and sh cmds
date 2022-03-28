@@ -1,0 +1,26 @@
+pipeline {
+    agent { label 'i5GioBOX||jetson-nano' }
+
+    stages {
+        stage('echo command') {
+            steps {
+                sh 'echo "Pipeline for Python"'
+            }
+        }
+        stage('Building Docker image') {
+        agent {dockerfile true}
+                stages {
+                    stage('Build img') {
+                        steps {
+                            sh 'echo "docker test"'
+                        }
+                    }
+                }
+        }
+        stage('Test finished') {
+            steps {
+                echo 'echo end of pipeline'
+            }
+        }
+    }
+}
