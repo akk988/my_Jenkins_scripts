@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+    stages {
+        stage('docker-compose build') {
+            steps {
+                echo 'Starting to build docker-compose'
+                script {
+                    sh 'cd gui && /usr/bin/docker-compose build'
+                }
+            }
+        }
+        stage('docker-compose run') {
+            steps {
+                echo 'Starting to run docker-compose'
+                script {
+                    sh 'cd gui && /usr/bin/docker-compose up'
+                }
+            }
+        }
+    }
+}
